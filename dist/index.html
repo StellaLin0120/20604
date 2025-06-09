@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="post1">
+<head>
+  <meta charset="UTF-8">
+  <title>溫度計</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<title>溫度轉換器</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      border: 1px solid #ccc; /* 輸出格邊框 */
+      padding: 10px; /* 輸出格內距 */
+      min-height: 20px; /* 輸出格最小高度 */
+    }
+  </style>
+  <script>
+    function celsiusToFahrenheit(celsius) {
+      return (celsius * 9/5) + 32;
+    }
+
+    function fahrenheitToCelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5/9;
+    }
+
+    function convertTemperature() {
+      let temperature = parseFloat(document.getElementById('temperature').value);
+      let from = document.getElementById('from').value;
+      let to = document.getElementById('to').value;
+      let result;
+
+      if (from === 'celsius' && to === 'fahrenheit') {
+        result = celsiusToFahrenheit(temperature).toFixed(2);
+        document.getElementById('result').textContent = `${temperature} 攝氏 = ${result} 華氏`;
+      } else if (from === 'fahrenheit' && to === 'celsius') {
+        result = fahrenheitToCelsius(temperature).toFixed(2);
+        document.getElementById('result').textContent = `${temperature} 華氏 = ${result} 攝氏`;
+      } else if (from === to){
+        result = temperature.toFixed(2);
+        document.getElementById('result').textContent = `${temperature} ${from} = ${result} ${to}`;
+      } else {
+        document.getElementById('result').textContent = '無效的轉換';
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>溫度轉換器</h1>
+    <div class="input-group">
+      <label for="temperature">溫度:</label>
+      <input type="number" id="temperature">
+    </div>
+    <div class="input-group">
+      <label for="from">從:</label>
+      <select id="from">
+        <option value="celsius">攝氏</option>
+        <option value="fahrenheit">華氏</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="to">到:</label>
+      <select id="to">
+        <option value="fahrenheit">華氏</option>
+        <option value="celsius">攝氏</option>
+      </select>
+    </div>
+    <button onclick="convertTemperature()">轉換</button>
+    <div id="result"></div>
+  </div>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
